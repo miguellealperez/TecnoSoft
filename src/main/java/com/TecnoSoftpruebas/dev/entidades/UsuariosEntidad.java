@@ -19,7 +19,7 @@ import jakarta.persistence.Table;
 @Table(name = "usuarios")
 public class UsuariosEntidad {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)//@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.AUTO)//@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuario_ID")
     private Long usuarioID;
     
