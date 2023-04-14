@@ -19,7 +19,7 @@
                     <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required minlength="3" maxlength="50" placeholder="Ingrese el nombre" />
                 </div>
                 <div class="form-group">
-                    <label for="usuarioID">Número de Identificación:</label>
+                    <label for="usuarioID" class="form-label">Número de documento de identidad:</label>
                     <input type="number" id="usuarioID" name="usuarioID" th:field="*{usuarioID}" class="form-control" placeholder="Ingrese el id" />
                 </div>
                 <div class="form-group">
@@ -33,7 +33,7 @@
                 <div class="form-group">
                     <label for="rolID">Rol:</label>
                     <!-- Añadir un selector con clase form-control para elegir el rol -->
-                    <select id="rolID" name="rolID" th:field="*{rolID}" class="form-control" required>
+                    <select id="rolID" name="rolID" th:field="*{rolID}" class="form-control" required> 
                         <!-- Añadir una opción para cada rol disponible -->
                         <option value="">Seleccione el rol</option>
                         <option th:value="1">Administrador</option>
