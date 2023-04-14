@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -31,6 +32,7 @@ public class UsuariosControlador {
 
     @Autowired
     private UsuariosServicio usuariosServicio;
+
 
     @Autowired
     public UsuariosControlador(UsuariosServicio usuariosServicio) {
@@ -64,38 +66,54 @@ public class UsuariosControlador {
             return "usuarionuevo";
         }
     }
-
-    @GetMapping("/usuarios/eliminar/{usuarioID}")
-    public String eliminarUsuario(@PathVariable("usuarioID") Long usuarioID) {
+    
+    
+        @GetMapping("/usuarios/eliminar/{usuarioID}")
+        public String eliminarUsuario
+        (@PathVariable("usuarioID")
+        Long usuarioID
+        
+            ) {
         usuariosServicio.eliminarUsuarioPorId(usuarioID);
-        return "redirect:/usuarios";
-    }
-
-    @GetMapping("/login")
-    public String showLoginForm(Model model) {
-        UsuariosEntidad usuario = new UsuariosEntidad();
-        model.addAttribute("usuario", usuario);
-        return "login";
-    }
-
-    @PostMapping("/login")
-    public String submitLoginForm(@ModelAttribute("usuario") UsuariosEntidad usuario, BindingResult bindingResult, HttpSession session, Model model) {
-        UsuariosEntidad authenticatedUser = usuariosServicio.authenticateUser(usuario.getCorreo(), usuario.getContrasenia());
-        if (authenticatedUser != null) {
-            List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
-            User user = new User(authenticatedUser.getCorreo(), authenticatedUser.getContrasenia(), authorities);
-            session.setAttribute("user", user);
             return "redirect:/usuarios";
-        } else {
-            bindingResult.rejectValue("contrasenia", "error.user", "Contraseña incorrecta");
-            model.addAttribute("loginError", true);
+        }
+
+        @GetMapping("/login")
+        public String showLoginForm
+        (Model model
+        
+            ) {
+        UsuariosEntidad usuario = new UsuariosEntidad();
+            model.addAttribute("usuario", usuario);
             return "login";
         }
-    }
 
-    @GetMapping("/logout")
-    public String logout(HttpSession session) {
+        @PostMapping("/login")
+        public String submitLoginForm
+        (@ModelAttribute("usuario")
+        UsuariosEntidad usuario, BindingResult bindingResult
+        , HttpSession session, Model model
+        
+            ) {
+        UsuariosEntidad authenticatedUser = usuariosServicio.authenticateUser(usuario.getCorreo(), usuario.getContrasenia());
+            if (authenticatedUser != null) {
+                List<GrantedAuthority> authorities = AuthorityUtils.createAuthorityList("ROLE_USER");
+                User user = new User(authenticatedUser.getCorreo(), authenticatedUser.getContrasenia(), authorities);
+                session.setAttribute("user", user);
+                return "redirect:/usuarios";
+            } else {
+                bindingResult.rejectValue("contrasenia", "error.user", "Contraseña incorrecta");
+                model.addAttribute("loginError", true);
+                return "login";
+            }
+        }
+
+        @GetMapping("/logout")
+        public String logout
+        (HttpSession session
+        
+            ) {
         session.invalidate();
-        return "redirect:/login";
+            return "redirect:/login";
+        }
     }
-}

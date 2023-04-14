@@ -33,7 +33,7 @@ public class UsuariosEntidad {
     private String contrasenia;
     
     @Column(name = "rol_ID")
-    private Long rolID;
+    private String rolID;
     
     public UsuariosEntidad(){}
 
@@ -61,11 +61,11 @@ public class UsuariosEntidad {
         this.correo = correo;
     }
 
-    public Long getRolID() {
+    public String getRolID() {
         return rolID;
     }
 
-    public void setRolID(Long rolID) {
+    public void setRolID(String rolID) {
         this.rolID = rolID;
     }
 

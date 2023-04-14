@@ -36,9 +36,9 @@
                     <select id="rolID" name="rolID" th:field="*{rolID}" class="form-control" required> 
                         <!-- Añadir una opción para cada rol disponible -->
                         <option value="">Seleccione el rol</option>
-                        <option th:value="1">Administrador</option>
-                        <option th:value="2">Gerente</option>
-                        <option th:value="3">Contable</option>
+                        <option th:value="Administrador">Administrador</option>
+                        <option th:value="Gerente">Gerente</option>
+                        <option th:value="Contable">Contable</option>
                     </select>
                     <div th:if="${#fields.hasErrors('rolID')}" th:errors="*{rolID}" class="text-danger"></div>
                 </div>
