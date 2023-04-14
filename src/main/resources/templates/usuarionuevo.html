@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" encoding="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Crear usuario</title>
+        <!-- Incluir los recursos de Bootstrap -->
+        <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+        <script src="/webjars/jquery/jquery.min.js"></script>
+        <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Crear usuario</h1>
+            <!-- Añadir un formulario con clase form -->
+            <form th:action="@{/usuarios/crear}" th:object="${usuario}" method="post" class="form">
+                <!-- Añadir un grupo de entrada con clase form-group para cada campo -->
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required minlength="3" maxlength="50" placeholder="Ingrese el nombre" />
+                </div>
+                <div class="form-group">
+                    <label for="usuarioID">Número de Identificación:</label>
+                    <input type="number" id="usuarioID" name="usuarioID" th:field="*{usuarioID}" class="form-control" placeholder="Ingrese el id" />
+                </div>
+                <div class="form-group">
+                    <label for="correo">Correo electrónico:</label>
+                    <input type="email" id="correo" name="correo" th:field="*{correo}" class="form-control" required maxlength="50" placeholder="Ingrese el correo electrónico" />
+                </div>
+                <div class="form-group">
+                    <label for="contrasenia">Contraseña:</label>
+                    <input type="password" id="contrasenia" name="contrasenia" th:field="*{contrasenia}" class="form-control" required minlength="8" placeholder="Ingrese la contraseña" />
+                </div>
+                <div class="form-group">
+                    <label for="rolID">Rol:</label>
+                    <!-- Añadir un selector con clase form-control para elegir el rol -->
+                    <select id="rolID" name="rolID" th:field="*{rolID}" class="form-control" required>
+                        <!-- Añadir una opción para cada rol disponible -->
+                        <option value="">Seleccione el rol</option>
+                        <option th:value="1">Administrador</option>
+                        <option th:value="2">Gerente</option>
+                        <option th:value="3">Contable</option>
+                    </select>
+                    <div th:if="${#fields.hasErrors('rolID')}" th:errors="*{rolID}" class="text-danger"></div>
+                </div>
+                <!-- Mostrar el mensaje de error si existe en el modelo-->
+                <div th:if="${error}" class="alert alert-danger">
+                    <p th:text="${error}"></p>
+                </div> 
+                <!-- Añadir dos botones con clase btn para enviar o cancelar el formulario -->
+                <button type="submit" class="btn btn-primary">Crear usuario</button>
+                <a href="/usuarios" class="btn btn-secondary">Cancelar</a>
+            </form>
+        </div>
+    </body>
+</html>
