@@ -13,5 +13,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UsuariosRepositorio extends JpaRepository<UsuariosEntidad, Long> {
     UsuariosEntidad findByNombre(String nombre);
 
-    public UsuariosEntidad findByCorreo(String correo);
+    UsuariosEntidad findByCorreo(String correo);
+    
+    //UsuariosEntidad findByIDENTIF(Long id);
+
+    public UsuariosEntidad findByCorreoAndUsuarioIDNot(String correo, Long usuarioID);
+
+    //public UsuariosEntidad findByNumeroIdentificacionAndUsuarioIDNot(Long usuarioID, Long usuarioID0);
+
+    public UsuariosEntidad findByUsuarioIDNot(Long usuarioID);
+
+    public UsuariosEntidad findByCorreoAndUsuarioIDNotOrUsuarioIDNot(String correo, Long usuarioID, Long usuarioID0);
 }

@@ -2,7 +2,7 @@
 <html lang="es" encoding="UTF-8" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>Crear usuario</title>
+        <title>Editar usuario</title>
         <!-- Incluir los recursos de Bootstrap -->
         <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
         <script src="/webjars/jquery/jquery.min.js"></script>
@@ -10,21 +10,23 @@
     </head>
     <body>
         <div class="container">
-            <h1>Crear usuario</h1>
+            <h1>Editar usuario</h1>
             <!-- Añadir un formulario con clase form -->
-            <form th:action="@{/usuarios/crear}" th:object="${usuario}" method="post" class="form">
+            <form th:action="@{/usuarios/editar}" th:object="${usuario}" method="post" class="form">
+                <!-- Añadir un campo oculto para el id del usuario -->
+                <input type="hidden" th:field="*{usuarioID}" />
                 <!-- Añadir un grupo de entrada con clase form-group para cada campo -->
                 <div class="form-group">
                     <label for="nombre">Nombre:</label>
                     <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required minlength="3" maxlength="50" placeholder="Ingrese el nombre" />
                 </div>
                 <div class="form-group">
-                    <label for="usuarioID" class="form-label">Número de documento de identidad:</label>
-                    <input type="number" id="usuarioID" name="usuarioID" th:field="*{usuarioID}" class="form-control" required minlength="5" maxlength="20" placeholder="Ingrese el id" />
-                </div>
-                <div class="form-group">
                     <label for="correo">Correo electrónico:</label>
                     <input type="email" id="correo" name="correo" th:field="*{correo}" class="form-control" required maxlength="50" placeholder="Ingrese el correo electrónico" />
+                </div>
+                <div class="form-group">
+                    <label for="usuarioID">Número de documento de identidad:</label>
+                    <input type="number" id="usuarioID" name="usuarioID" th:field="*{usuarioID}" class="form-control" required minlength="5" maxlength="20" placeholder="Ingrese el id" readonly />
                 </div>
                 <div class="form-group">
                     <label for="contrasenia">Contraseña:</label>
@@ -46,9 +48,10 @@
                 <div th:if="${error}" class="alert alert-danger">
                     <p th:text="${error}"></p>
                 </div> 
-                <!-- Añadir dos botones con clase btn para enviar o cancelar el formulario -->
-                <button type="submit" class="btn btn-primary">Crear usuario</button>
-                <a th:href="@{/usuarios}" class="btn btn-secondary">Cancelar</a>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    <a th:href="@{/usuarios}" class="btn btn-link">Cancelar</a>
+                </div>
             </form>
         </div>
     </body>

@@ -76,5 +76,8 @@ public class UsuariosEntidad {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-   
+
+    public boolean isPresente() {
+        return getCorreo() != null;
+    }
 }

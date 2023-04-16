@@ -13,7 +13,8 @@
             <div class="card">
                 <h5 class="card-header">Lista de usuarios</h5>
                 <div class="card-body">
-                    <a href="/usuarios/nuevo" class="btn btn-success mb-3">Crear nuevo usuario</a>
+                    <a th:href="@{/usuarios/nuevo}" class="btn btn-success mb-3">Crear nuevo usuario</a>
+                    <p>Usuario ID: [[${usuarioID}]]</p>
                     <div class="table-responsive">
                         <table class="table table-borderless datatable table-hover">
                             <thead class="thead-dark">
@@ -34,10 +35,11 @@
                                     <td th:text="${usuario.rolID}"></td>
                                     <td th:text="${usuario.usuarioID}"></td>
                                     <td>
-                                        <a href="/usuarios/editar/${usuario.usuarioID}" class="btn btn-warning btn-sm">Editar</a>
+                                        <a th:href="@{/usuarios/editar/{usuarioID}(usuarioID=${usuario.usuarioID})}" class="btn btn-warning btn-sm">Editar</a>
                                         <a th:href="@{/usuarios/eliminar/{usuarioID}(usuarioID=${usuario.usuarioID})}"
                                            class="btn btn-danger btn-sm"
                                            onclick="return confirm('¿Está seguro de que desea eliminar al usuario?');">Eliminar</a>
+
                                     </td>
                                 </tr>
                             </tbody>
