@@ -2,54 +2,124 @@
 <html lang="es" encoding="UTF-8" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>Lista de usuarios</title>
+        <title>Lista de usuarios - TecnoSoft</title>
         <!-- Incluir los recursos de Bootstrap -->
         <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
         <script src="/webjars/jquery/jquery.min.js"></script>
         <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+        <style>
+            /* Agregar estilo personalizado */
+            body {
+                padding-top: 70px;
+            }
+            .card-footer {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+            .btn-toolbar .btn {
+                margin-right: 10px;
+            }
+            .btn-toolbar .btn:last-child {
+                margin-right: 0;
+            }
+        </style>
     </head>
     <body>
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">Tecno Soft</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/ventas}">Ventas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/compras}">Compras</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/logout}">Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
         <div class="container mt-4">
             <div class="card">
                 <h5 class="card-header">Lista de usuarios</h5>
                 <div class="card-body">
-                    <a th:href="@{/usuarios/nuevo}" class="btn btn-success mb-3">Crear nuevo usuario</a>
-                    <p>Usuario ID: [[${usuarioID}]]</p>
-                    <div class="table-responsive">
-                        <table class="table table-borderless datatable table-hover">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Correo</th>
-                                    <th>Contraseña</th>
-                                    <th>Rol</th>
-                                    <th>ID</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="usuario : ${usuarios}">
-                                    <td th:text="${usuario.nombre}"></td>
-                                    <td th:text="${usuario.correo}"></td>
-                                    <td th:text="${usuario.contrasenia}"></td>
-                                    <td th:text="${usuario.rolID}"></td>
-                                    <td th:text="${usuario.usuarioID}"></td>
-                                    <td>
-                                        <a th:href="@{/usuarios/editar/{usuarioID}(usuarioID=${usuario.usuarioID})}" class="btn btn-warning btn-sm">Editar</a>
-                                        <a th:href="@{/usuarios/eliminar/{usuarioID}(usuarioID=${usuario.usuarioID})}"
-                                           class="btn btn-danger btn-sm"
-                                           onclick="return confirm('¿Está seguro de que desea eliminar al usuario?');">Eliminar</a>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <!-- Botones -->
+                    <div class="btn-toolbar mb-3" role="toolbar">
+                        <div class="btn-group mr-2" role="group">
+                            <a th:href="@{/usuarios/nuevo}" class="btn btn-success">Crear nuevo usuario</a>
+                        </div>
+                        <p>Usuario ID: [[${usuarioID}]]</p>
+                    </div>
+                    <!-- Lista de usuarios -->
+                    <div class="row">
+                        <div th:each="usuario : ${usuarios}" th:object="${usuario}" class="col-md-4">
+                            <div class="card mb-3">
+                                <h5 class="card-header" th:text="*{nombre}"></h5>
+                                <div class="card-body">
+                                    <p class="card-text"><strong>Rol:</strong> <span th:text="*{rolID}"></span></p>
+                                    <p class="card-text"><strong>ID:</strong> <span th:text="*{usuarioID}"></span></p>
+                                    <p class="card-text"><strong>Correo:</strong> <span th:text="*{correo}"></span></p>
+                                    <p class="card-text"><strong>Contraseña:</strong> <span th:text="*{contrasenia}"></span></p>
+                                    <p class="card-text"><strong>Fecha de registro:</strong> <span text = "18/04/23">18/04/23</span></p>
+                                    <div class="card-footer">
+                                        <div class="btn-toolbar" role="toolbar">
+                                            <div class="btn-group mr-2" role="group">
+                                                <a th:href="@{/usuarios/editar/{usuarioID}(usuarioID=*{usuarioID})}" class="btn btn-primary">Editar</a>
+                                            </div>
+                                            <div class="btn-group" role="group">
+                                                <a class="btn btn-danger " data-toggle="modal" data-target="#confirmarEliminacion">Eliminar</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Modal de confirmación de eliminación -->
+                                    <div class="modal fade" id="confirmarEliminacion" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="modalLabel">Confirmar eliminación</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Está seguro de que desea eliminar al usuario?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                                    <a th:href="@{/usuarios/eliminar/{usuarioID}(usuarioID=*{usuarioID})}"  class="btn btn-danger">Eliminar</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
 </html>
+
+
+
+
+
 <!--
 <!DOCTYPE html>
 <html lang="es" encoding="UTF-8" xmlns:th="http://www.thymeleaf.org">

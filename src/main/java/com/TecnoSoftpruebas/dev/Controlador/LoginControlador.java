@@ -63,7 +63,7 @@ public class LoginControlador {
             }
         } else {
             bindingResult.rejectValue("contrasenia", "error.user", "Contraseña incorrecta");
-            model.addAttribute("loginError", true);
+            model.addAttribute("loginError", "¡Oops! Correo o contraseña ingresados incorrectos. Por favor, inténtalo de nuevo.");
             return "login";
         }
     }
@@ -74,4 +74,5 @@ public class LoginControlador {
         session.invalidate();
         return "redirect:/login";
     }
+
 }

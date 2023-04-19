@@ -6,9 +6,6 @@ package com.TecnoSoftpruebas.dev.Controlador;
 
 import com.TecnoSoftpruebas.dev.Servicios.UsuariosServicio;
 import com.TecnoSoftpruebas.dev.entidades.UsuariosEntidad;
-import com.TecnoSoftpruebas.dev.repositorios.UsuariosRepositorio;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -21,11 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -101,7 +93,7 @@ public class UsuariosControlador {
             model.addAttribute("error", "El usuario ya está registrado.");
             return "usuarionuevo";
         } catch (UsuariosServicio.UsuarioExistenteException e) {
-            model.addAttribute("error", "El usuario/correo ya está registrado.");
+            model.addAttribute("error", "El ID/correo ya está registrado.");
             return "usuarionuevo";
         }
     }
@@ -199,7 +191,7 @@ public class UsuariosControlador {
             model.addAttribute("error", "El usuario ya está registrado.");
             return "usuarionuevo";
         } catch (UsuariosServicio.UsuarioExistenteException e) {
-            model.addAttribute("error", "El usuario/correo ya está registrado.");
+            model.addAttribute("error", "El id/correo ya está registrado.");
             return "usuarionuevo";
         }
     }
