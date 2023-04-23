@@ -32,7 +32,7 @@ public class UsuariosServicio {
     public UsuariosEntidad crearUsuario(UsuariosEntidad usuario) {
         // Verificar si el usuario ya existe
         if (usuariosRepositorio.findById(usuario.getUsuarioID()).isPresent()) {
-            throw new UsuarioExistenteException("El usuario ya está registrado 001");
+            throw new UsuarioExistenteException("Usuario ya registrado por el ID " + usuario.getUsuarioID());
         }
 
         // Verificar si el correo electrónico ya está registrado

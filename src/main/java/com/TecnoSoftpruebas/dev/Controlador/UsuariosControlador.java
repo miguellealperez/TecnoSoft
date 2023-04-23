@@ -89,11 +89,13 @@ public class UsuariosControlador {
         try {
             usuariosServicio.crearUsuario(usuario);
             return "redirect:/usuarios";
-        } catch (DataIntegrityViolationException e) {
-            model.addAttribute("error", "El usuario ya está registrado.");
-            return "usuarionuevo";
         } catch (UsuariosServicio.UsuarioExistenteException e) {
-            model.addAttribute("error", "El ID/correo ya está registrado.");
+            model.addAttribute("error", e.getMessage());
+            System.out.println(e.getMessage());
+            return "usuarionuevo";
+        } catch (DataIntegrityViolationException e) {
+            model.addAttribute("error", "DATA ID/correo ya está registrado.");
+            System.out.println("2");
             return "usuarionuevo";
         }
     }

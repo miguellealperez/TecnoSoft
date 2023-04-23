@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
@@ -23,14 +25,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class LoginControlador {
 
     @Autowired
-    private UsuariosServicio usuariosServicio;
+    private final UsuariosServicio usuariosServicio;
 
     @Autowired
     public LoginControlador(UsuariosServicio usuariosServicio) {
         this.usuariosServicio = usuariosServicio;
     }
 
-    @GetMapping("/login")
+    @RequestMapping(value= {"/", "/login"}, method=RequestMethod.GET)
     public String showLoginForm(Model model
     ) {
         UsuariosEntidad usuario = new UsuariosEntidad();
@@ -52,18 +54,20 @@ public class LoginControlador {
 
             // Redirigir al usuario a la vista correspondiente según su rol
             switch (rol) {
-                case "Administrador":
+                case "Administrador" -> {
                     return "redirect:/usuarios";
-                case "Gerente":
+                }
+                case "Gerente" -> {
                     return "redirect:/gerente/" + authenticatedUser.getUsuarioID();
-                case "Contable":
+                }
+                case "Contable" -> {
                     return "redirect:/contable/" + authenticatedUser.getUsuarioID();
-                default:
-                    throw new IllegalArgumentException("Rol no válido");
+                }
+                default -> throw new IllegalArgumentException("Rol no válido");
             }
         } else {
             bindingResult.rejectValue("contrasenia", "error.user", "Contraseña incorrecta");
-            model.addAttribute("loginError", "¡Oops! Correo o contraseña ingresados incorrectos. Por favor, inténtalo de nuevo.");
+            model.addAttribute("loginError", "Contraseña incorrecta. Por favor, inténtalo de nuevo.");
             return "login";
         }
     }
