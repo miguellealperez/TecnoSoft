@@ -2,7 +2,7 @@
 <html lang="es" encoding="UTF-8" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>Lista de Productos - TecnoSoft</title>
+        <title>Lista de Gastos - TecnoSoft</title>
         <!-- Incluir los recursos de Bootstrap -->
         <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
         <script src="/webjars/jquery/jquery.min.js"></script>
@@ -59,36 +59,25 @@
 
         <div class="container mt-4">
             <div class="card">
-                <h5 class="card-header">Lista de Productos</h5>
+                <h5 class="card-header">Lista de Gastos</h5>
                 <div class="card-body">
                     <!-- Botones -->
                     <div class="btn-toolbar mb-3" role="toolbar">
                         <div class="btn-group mr-2" role="group">
-                            <a th:href="@{/productos/nuevo}" class="btn btn-success">Crear nuevo producto</a>
+                            <a th:href="@{/contable/__${usuarioID}__/nuevo}" class="btn btn-success">Crear nuevo Gasto</a>
                         </div>
                     </div>
                     <!-- Lista de usuarios -->
                     <div class="row">
-                        <div th:each="producto : ${productos}" th:object="${producto}" class="col-md-4">
+                        <div th:each="gasto : ${gastos}" th:object="${gasto}" class="col-md-4">
                             <div class="card mb-3">
-                                <h5 class="card-header" th:text="*{productoNombre}"></h5>
+                                <h5 class="card-header" th:text="*{nombreGasto}"></h5>
                                 <div class="card-body">
-                                    <p class="card-text"><strong>Producto ID:</strong> <span th:text="*{productoID}"></span></p>
-                                    <p class="card-text"><strong>Costo:</strong> <span th:text="*{productoCosto}"></span></p>
-                                    <p class="card-text"><strong>Valor venta:</strong> <span th:text="*{productoValor}"></span></p>
-                                    <p class="card-text"><strong>Tipo:</strong> <span th:text="*{productoTipo}"></span></p>
-                                    <p class="card-text"><strong>Descripción:</strong> <span th:text="*{productoDescripcion}"></span></p>
-                                    <div class="card-footer">
-                                        <div class="btn-toolbar" role="toolbar">
-                                            <div class="btn-group mr-2" role="group">
-                                                <a  th:href="@{/productos/editar/{productoID}(productoID=*{productoID})}" class="btn btn-primary">Editar</a>
-                                            </div>
-                                            <div class="btn-group mr-2" role="group">
-                                                <a th:href="@{/productos/eliminar/{productoID}(productoID=*{productoID})}" class="btn btn-danger" 
-                                                   onclick="return confirm('¿Está seguro de que desea eliminar el producto?');">Eliminar</a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <p class="card-text"><strong>Gasto ID:</strong> <span th:text="*{numeroGasto}"></span></p>
+                                    <p class="card-text"><strong>Valor:</strong> <span th:text="*{valorGasto}"></span></p>
+                                    <p class="card-text"><strong>Fecha:</strong> <span th:text="*{fechaGasto}"></span></p>
+                                    <p class="card-text"><strong>Tipo:</strong> <span th:text="*{tipoGasto}"></span></p>
+                                    <p class="card-text"><strong>Descripción:</strong> <span th:text="*{descripcionGasto}"></span></p>
                                 </div>
                             </div>
                         </div>

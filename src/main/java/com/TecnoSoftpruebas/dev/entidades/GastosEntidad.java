@@ -1,6 +1,10 @@
 package com.TecnoSoftpruebas.dev.entidades;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,6 +33,7 @@ public class GastosEntidad {
 
     @Column(name = "fecha_gasto")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private Date fechaGasto;
     
     @Column(name = "descripcion_gasto")
@@ -69,8 +74,15 @@ public class GastosEntidad {
         return fechaGasto;
     }
 
-    public void setFechaGasto(Date fechaGasto) {
-        this.fechaGasto = fechaGasto;
+    public void setFechaGasto(String fechaGasto) {
+        Date date=null;
+        try {
+            date = (Date) new SimpleDateFormat("yyyy-mm-dd").parse(fechaGasto);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        this.fechaGasto = date;
     }
 
     public String getDescripcionGasto() {
