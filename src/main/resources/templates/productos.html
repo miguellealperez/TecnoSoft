@@ -59,33 +59,33 @@
 
         <div class="container mt-4">
             <div class="card">
-                <h5 class="card-header">Lista de usuarios</h5>
+                <h5 class="card-header">Lista de Productos</h5>
                 <div class="card-body">
                     <!-- Botones -->
                     <div class="btn-toolbar mb-3" role="toolbar">
                         <div class="btn-group mr-2" role="group">
-                            <a th:href="@{/usuarios/nuevo}" class="btn btn-success">Crear nuevo usuario</a>
+                            <a th:href="@{/productos/nuevo}" class="btn btn-success">Crear nuevo producto</a>
                         </div>
                     </div>
                     <!-- Lista de usuarios -->
                     <div class="row">
-                        <div th:each="usuario : ${usuarios}" th:object="${usuario}" class="col-md-4">
+                        <div th:each="producto : ${productos}" th:object="${producto}" class="col-md-4">
                             <div class="card mb-3">
-                                <h5 class="card-header" th:text="*{nombre}"></h5>
+                                <h5 class="card-header" th:text="*{productoNombre}"></h5>
                                 <div class="card-body">
-                                    <p class="card-text"><strong>Rol:</strong> <span th:text="*{rolID}"></span></p>
-                                    <p class="card-text"><strong>ID:</strong> <span th:text="*{usuarioID}"></span></p>
-                                    <p class="card-text"><strong>Correo:</strong> <span th:text="*{correo}"></span></p>
-                                    <p class="card-text"><strong>Contraseña:</strong> <span th:text="*{contrasenia}"></span></p>
-                                    <p class="card-text"><strong>Fecha de registro:</strong> <span text = "20/04/23">20/04/23</span></p>
+                                    <p class="card-text"><strong>Producto ID:</strong> <span th:text="*{productoID}"></span></p>
+                                    <p class="card-text"><strong>Costo:</strong> <span th:text="*{productoCosto}"></span></p>
+                                    <p class="card-text"><strong>Valor venta:</strong> <span th:text="*{productoValor}"></span></p>
+                                    <p class="card-text"><strong>Tipo:</strong> <span th:text="*{productoTipo}"></span></p>
+                                    <p class="card-text"><strong>Descripción:</strong> <span th:text="*{productoDescripcion}"></span></p>
                                     <div class="card-footer">
                                         <div class="btn-toolbar" role="toolbar">
                                             <div class="btn-group mr-2" role="group">
-                                                <a  th:href="@{/usuarios/editar/{usuarioID}(usuarioID=*{usuarioID})}" class="btn btn-primary">Editar</a>
+                                                <a  th:href="@{/productos/editar/{productoID}(productoID=*{productoID})}" class="btn btn-primary">Editar</a>
                                             </div>
                                             <div class="btn-group mr-2" role="group">
-                                                <a th:href="@{/usuarios/eliminar/{usuarioID}(usuarioID=*{usuarioID})}" class="btn btn-danger" 
-                                                   onclick="return confirm('¿Está seguro de que desea eliminar al usuario?');">Eliminar</a>
+                                                <a th:href="@{/productos/eliminar/{productoID}(productoID=*{productoID})}" class="btn btn-danger" 
+                                                   onclick="return confirm('¿Está seguro de que desea eliminar el producto?');">Eliminar</a>
                                             </div>
                                         </div>
                                     </div>
@@ -98,40 +98,3 @@
         </div>
     </body>
 </html>
-
-
-
-
-
-<!--
-<!DOCTYPE html>
-<html lang="es" encoding="UTF-8" xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <meta charset="UTF-8">
-        <title>Lista de usuarios</title>
-    </head>
-    <body>
-        <h1>Lista de usuarios</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>contrasenia</th>
-                    <th>Rol</th>
-                    <th>ID</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="usuario : ${usuarios}">
-                    <td th:text="${usuario.nombre}"></td>
-                    <td th:text="${usuario.correo}"></td>
-                    <td th:text="${usuario.contrasenia}"></td>
-                    <td th:text="${usuario.rolID}"></td>
-                    <td th:text="${usuario.usuarioID}"></td>
-                </tr>
-            </tbody>
-        </table>
-    </body>
-</html>
- comment -->

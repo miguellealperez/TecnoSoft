@@ -2,49 +2,110 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>Login</title>
-        <!-- Agregamos los estilos de Bootstrap -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-              crossorigin="anonymous">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Login - Tecno Soft</title>
+        <!-- Estilos -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css">
+        <style>
+            body {
+                background-color: #f2f2f2;
+            }
+
+            .card {
+                border: none;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            }
+
+            .card-header {
+                background-color: #3c3c3c;
+                color: white;
+                text-align: center;
+                border-radius: 10px 10px 0 0;
+            }
+
+            .card-body {
+                padding: 40px;
+            }
+
+            .form-control {
+                border-radius: 5px;
+                border: none;
+                box-shadow: none;
+                border-bottom: 2px solid #3c3c3c;
+            }
+
+            .form-control:focus {
+                box-shadow: none;
+                border-bottom: 2px solid #1a1a1a;
+            }
+
+            .btn-primary {
+                background-color: #3c3c3c;
+                border: none;
+                border-radius: 5px;
+                width: 100%;
+            }
+
+            .btn-primary:hover {
+                background-color: #1a1a1a;
+            }
+        </style>
     </head>
     <body>
-
-        <div class="container">
+        <div class="container py-5">
             <div class="row">
                 <div class="col-md-6 offset-md-3">
-                    <h1 class="text-center mb-4">Login</h1>
-                    <!-- Agregamos el formulario de login -->
-                    <form action="#" th:action="@{/login}" th:object="${usuario}" method="post">
-                        <div class="form-group">
-                            <label for="correo">Correo electrónico:</label>
-                            <input type="email" class="form-control" id="correo" name="correo"
-                                   th:field="*{correo}" required>
+                    <div class="card">
+                        <div class="card-header">
+                            <h1 class="mb-0">Tecno Soft</h1>
                         </div>
-                        <div class="form-group">
-                            <label for="contrasenia">Contraseña:</label>
-                            <input type="password" class="form-control" id="contrasenia" name="contrasenia"
-                                   th:field="*{contrasenia}" required>
+                        <div class="card-body">
+                            <h2 class="mb-4">Iniciar sesión</h2>
+                            <!-- Formulario de login -->
+                            <form action="#" th:action="@{/login}" th:object="${usuario}" method="post">
+                                <div class="form-group">
+                                    <label for="correo">Correo electrónico:</label>
+                                    <input type="email" class="form-control" id="correo" name="correo" th:field="*{correo}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contrasenia">Contraseña:</label>
+                                    <input type="password" class="form-control" id="contrasenia" name="contrasenia" th:field="*{contrasenia}" required>
+                                    <button type="button" id="showPassword" class="btn btn-secondary mt-4">Mostrar</button>
+                                </div>
+                                
+                                <!-- Mostrar el mensaje de error si existe en el modelo-->
+                                <div th:if="${loginError}" class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <strong>Error:</strong> <span th:text="${loginError}"></span>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div> 
+                                <button type="submit" class="btn btn-primary mt-4">Iniciar sesión</button>
+                            </form>
                         </div>
-                        <div th:if="${loginError}" class="alert alert-danger">
-                            <p>¡Oops! La contraseña ingresada es incorrecta. Por favor, inténtalo de nuevo.</p>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Iniciar sesión</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Agregamos los scripts de Bootstrap -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+        <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+        <script>
+            const showPasswordButton = document.getElementById("showPassword");
+            const passwordField = document.getElementById("contrasenia");
 
+            showPasswordButton.addEventListener("click", function () {
+                if (passwordField.type === "password") {
+                    passwordField.type = "text";
+                    showPasswordButton.textContent = "Ocultar";
+                } else {
+                    passwordField.type = "password";
+                    showPasswordButton.textContent = "Mostrar";
+                }
+            });
+        </script>
     </body>
 </html>

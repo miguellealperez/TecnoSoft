@@ -6,8 +6,6 @@ package com.TecnoSoftpruebas.dev.entidades;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -19,7 +17,7 @@ import jakarta.persistence.Table;
 @Table(name = "usuarios")
 public class UsuariosEntidad {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.AUTO)//@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuario_ID")
     private Long usuarioID;
     
@@ -33,7 +31,7 @@ public class UsuariosEntidad {
     private String contrasenia;
     
     @Column(name = "rol_ID")
-    private Long rolID;
+    private String rolID;
     
     public UsuariosEntidad(){}
 
@@ -61,11 +59,11 @@ public class UsuariosEntidad {
         this.correo = correo;
     }
 
-    public Long getRolID() {
+    public String getRolID() {
         return rolID;
     }
 
-    public void setRolID(Long rolID) {
+    public void setRolID(String rolID) {
         this.rolID = rolID;
     }
 
@@ -76,5 +74,8 @@ public class UsuariosEntidad {
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
     }
-   
+
+    public boolean isPresente() {
+        return getCorreo() != null;
+    }
 }
