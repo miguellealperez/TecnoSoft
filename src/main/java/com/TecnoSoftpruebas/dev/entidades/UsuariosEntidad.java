@@ -4,9 +4,15 @@
  */
 package com.TecnoSoftpruebas.dev.entidades;
 
+
+
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -32,6 +38,10 @@ public class UsuariosEntidad {
     
     @Column(name = "rol_ID")
     private String rolID;
+
+    @OneToMany
+    @JoinColumn(name = "usuario_ID")
+    private Set<GastosEntidad> GastosEntidad;
     
     public UsuariosEntidad(){}
 
@@ -78,4 +88,13 @@ public class UsuariosEntidad {
     public boolean isPresente() {
         return getCorreo() != null;
     }
+
+    public Set<GastosEntidad> getGastosEntidad() {
+        return GastosEntidad;
+    }
+
+    public void setGastosEntidad(Set<GastosEntidad> gastosEntidad) {
+        GastosEntidad = gastosEntidad;
+    }
+
 }
