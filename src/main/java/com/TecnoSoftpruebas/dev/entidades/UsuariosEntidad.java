@@ -10,6 +10,7 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
@@ -39,7 +40,7 @@ public class UsuariosEntidad {
     @Column(name = "rol_ID")
     private String rolID;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_ID")
     private Set<GastosEntidad> GastosEntidad;
     

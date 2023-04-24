@@ -102,6 +102,8 @@
                                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required th:field="*{descripcionGasto}"></textarea>
                                 </div>
 
+                                <input type="hidden" name="usuario_ID" th:value="${usuarioID}" />
+
                                 <!-- Añadir un botón de tipo submit con clase btn y btn-primary para enviar el formulario -->
                                 <button type="submit" class="btn btn-primary">Crear</button>
                             </form>

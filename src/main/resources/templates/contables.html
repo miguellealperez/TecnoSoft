@@ -78,6 +78,7 @@
                                     <p class="card-text"><strong>Fecha:</strong> <span th:text="*{fechaGasto}"></span></p>
                                     <p class="card-text"><strong>Tipo:</strong> <span th:text="*{tipoGasto}"></span></p>
                                     <p class="card-text"><strong>Descripción:</strong> <span th:text="*{descripcionGasto}"></span></p>
+                                    <p class="card-text"><strong>Responsable:</strong> <span <td th:text="${gasto.usuariosEntidad != null} ? ${gasto.usuariosEntidad.nombre} : 'Usuario Eliminado.'"></td>></span></p>
                                 </div>
                             </div>
                         </div>
