@@ -28,8 +28,6 @@ public class ProductosControlador {
     @Autowired
     private ProductosServicio productosServicio;
     
-    @Autowired
-
     public ProductosControlador(ProductosServicio productosServicio) {
         this.productosServicio = productosServicio;
     }

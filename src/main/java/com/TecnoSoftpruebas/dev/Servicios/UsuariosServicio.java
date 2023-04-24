@@ -8,7 +8,6 @@ import com.TecnoSoftpruebas.dev.entidades.UsuariosEntidad;
 import com.TecnoSoftpruebas.dev.repositorios.UsuariosRepositorio;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,7 +19,6 @@ public class UsuariosServicio {
 
     private UsuariosRepositorio usuariosRepositorio;
 
-    @Autowired
     public UsuariosServicio(UsuariosRepositorio usuariosRepositorio) {
         this.usuariosRepositorio = usuariosRepositorio;
     }

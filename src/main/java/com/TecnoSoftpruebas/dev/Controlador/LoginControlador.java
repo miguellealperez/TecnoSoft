@@ -27,7 +27,6 @@ public class LoginControlador {
     @Autowired
     private final UsuariosServicio usuariosServicio;
 
-    @Autowired
     public LoginControlador(UsuariosServicio usuariosServicio) {
         this.usuariosServicio = usuariosServicio;
     }

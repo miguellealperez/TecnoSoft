@@ -29,7 +29,6 @@ public class UsuariosControlador {
     @Autowired
     private UsuariosServicio usuariosServicio;
 
-    @Autowired
     public UsuariosControlador(UsuariosServicio usuariosServicio) {
         this.usuariosServicio = usuariosServicio;
     }
