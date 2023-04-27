@@ -13,6 +13,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapKey;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -36,9 +38,18 @@ public class UsuariosEntidad {
     
     @Column(name = "contrasenia")
     private String contrasenia;
-    
-    @Column(name = "rol_ID")
-    private String rolID;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rol_ID")
+    private RolesEntidad rolesEntidad;
+
+    public RolesEntidad getRolesEntidad() {
+        return rolesEntidad;
+    }
+
+    public void setRolesEntidad(RolesEntidad rolesEntidad) {
+        this.rolesEntidad = rolesEntidad;
+    }
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_ID")
@@ -68,14 +79,6 @@ public class UsuariosEntidad {
 
     public void setCorreo(String correo) {
         this.correo = correo;
-    }
-
-    public String getRolID() {
-        return rolID;
-    }
-
-    public void setRolID(String rolID) {
-        this.rolID = rolID;
     }
 
     public String getContrasenia() {

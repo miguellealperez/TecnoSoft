@@ -86,14 +86,13 @@
                                 <div class="form-group">
                                     <label for="rolID">Rol:</label>
                                     <!-- Añadir un selector con clase form-control para elegir el rol -->
-                                    <select id="rolID" name="rolID" th:field="*{rolID}" class="form-control" required> 
+                                    <!-- Añadir un selector con clase form-control para elegir el rol -->
+                                    <select id="rolID" name="rolID" th:field="*{rolesEntidad}" class="form-control" required>
                                         <!-- Añadir una opción para cada rol disponible -->
                                         <option value="">Seleccione el rol</option>
-                                        <option th:value="Administrador">Administrador</option>
-                                        <option th:value="Gerente">Gerente</option>
-                                        <option th:value="Contable">Contable</option>
+                                        <option th:each="rol : ${roles}" th:value="${rol.rolID}" th:text="${rol.nombreRol}"></option>
                                     </select>
-                                    <div th:if="${#fields.hasErrors('rolID')}" th:errors="*{rolID}" class="text-danger"></div>
+                                    <div th:if="${#fields.hasErrors('rolesEntidad')}" th:errors="*{rolesEntidad}" class="text-danger"></div>
                                 </div>
                                 <!-- Mostrar el mensaje de error si existe en el modelo-->
                                 <div th:if="${error}" class="alert alert-danger">

@@ -49,7 +49,7 @@ public class LoginControlador {
         UsuariosEntidad authenticatedUser = usuariosServicio.authenticateUser(usuario.getCorreo(), usuario.getContrasenia());
         if (authenticatedUser != null) {
             // Obtener el rol del usuario autenticado
-            String rol = authenticatedUser.getRolID();
+            String rol = authenticatedUser.getRolesEntidad().getNombreRol();
 
             // Redirigir al usuario a la vista correspondiente según su rol
             switch (rol) {

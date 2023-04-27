@@ -49,7 +49,8 @@ public class UsuariosServicio {
         usuarioEditado.setNombre(usuarioEditado.getNombre());
         usuarioEditado.setCorreo(usuarioEditado.getCorreo());
         usuarioEditado.setContrasenia(usuarioEditado.getContrasenia());
-        usuarioEditado.setRolID(usuarioEditado.getRolID());
+        // usuarioEditado.setRolID(usuarioEditado.getRolID());
+        usuarioEditado.setRolesEntidad(usuarioEditado.getRolesEntidad());
         usuariosRepositorio.save(usuarioEditado);
     }
 

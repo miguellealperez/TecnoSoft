@@ -4,8 +4,12 @@
  */
 package com.TecnoSoftpruebas.dev.Controlador;
 
+import com.TecnoSoftpruebas.dev.Servicios.RolesServicios;
 import com.TecnoSoftpruebas.dev.Servicios.UsuariosServicio;
+import com.TecnoSoftpruebas.dev.entidades.RolesEntidad;
 import com.TecnoSoftpruebas.dev.entidades.UsuariosEntidad;
+import com.TecnoSoftpruebas.dev.repositorios.RolesRepositorio;
+
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -28,6 +32,12 @@ public class UsuariosControlador {
 
     @Autowired
     private UsuariosServicio usuariosServicio;
+
+    @Autowired
+    private RolesRepositorio rolesRepositorio;
+
+    @Autowired
+    private RolesServicios rolesServicios;
 
     public UsuariosControlador(UsuariosServicio usuariosServicio) {
         this.usuariosServicio = usuariosServicio;
@@ -68,6 +78,7 @@ public class UsuariosControlador {
     @GetMapping("/usuarios/nuevo")
     public String crearUsuario(Model model) {
         UsuariosEntidad usuario = new UsuariosEntidad();
+        model.addAttribute("roles", rolesRepositorio.findAll());
         model.addAttribute("usuario", usuario);
         return "usuarionuevo";
     }
@@ -90,6 +101,8 @@ public class UsuariosControlador {
     @PostMapping("/usuarios/crear")
     public String guardarUsuario(@ModelAttribute("usuario") UsuariosEntidad usuario, Model model) {
         try {
+            RolesEntidad roles = rolesServicios.buscarPorId(usuario.getRolesEntidad().getRolID());
+            usuario.setRolesEntidad(roles);
             usuariosServicio.crearUsuario(usuario);
             return "redirect:/usuarios";
         } catch (UsuariosServicio.UsuarioExistenteException e) {
@@ -157,6 +170,7 @@ public class UsuariosControlador {
         // Validar si existe el usuario
         if (usuario.isPresent()) {
             model.addAttribute("usuario", usuario.get());
+            model.addAttribute("roles", rolesRepositorio.findAll());
             return "usuarioseditar"; // retornar la vista para editar usuario
         } else {
             return "redirect:/usuarios"; // redireccionar a la lista de usuarios si el usuario no existe
@@ -199,6 +213,8 @@ public class UsuariosControlador {
                     return "usuarioseditar";
                 }
                 // Guardar el usuario editado
+                RolesEntidad roles = rolesServicios.buscarPorId(usuarioEditado.getRolesEntidad().getRolID());
+                usuarioEditado.setRolesEntidad(roles);
                 usuariosServicio.guardarUsuario(usuarioEditado);
                 return "redirect:/usuarios"; // redireccionar a la lista de usuarios
             }
