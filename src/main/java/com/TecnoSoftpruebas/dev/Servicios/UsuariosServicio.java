@@ -181,4 +181,11 @@ public class UsuariosServicio {
         }
 
     }
+
+    public Optional<UsuariosEntidad> buscarPorid(Long UsuarioID){
+        if(usuariosRepositorio.findById(UsuarioID).isPresent()){
+            return usuariosRepositorio.findById(UsuarioID);
+        }
+        return null;
+    }
 }
