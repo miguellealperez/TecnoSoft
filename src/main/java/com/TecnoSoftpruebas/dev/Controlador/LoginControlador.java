@@ -66,7 +66,7 @@ public class LoginControlador {
             }
         } else {
             bindingResult.rejectValue("contrasenia", "error.user", "Contraseña incorrecta");
-            model.addAttribute("loginError", "Contraseña incorrecta. Por favor, inténtalo de nuevo.");
+            model.addAttribute("loginError", "Contraseña incorrecta o Cuenta inactiva. Por favor, inténtelo de nuevo o Comuniquese con un administrador.");
             return "login";
         }
     }

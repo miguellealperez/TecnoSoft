@@ -4,6 +4,7 @@
  */
 package com.TecnoSoftpruebas.dev.Servicios;
 
+import com.TecnoSoftpruebas.dev.entidades.EstadoTipo;
 import com.TecnoSoftpruebas.dev.entidades.GastosEntidad;
 import com.TecnoSoftpruebas.dev.entidades.UsuariosEntidad;
 import com.TecnoSoftpruebas.dev.repositorios.UsuariosRepositorio;
@@ -51,6 +52,7 @@ public class UsuariosServicio {
         usuarioEditado.setContrasenia(usuarioEditado.getContrasenia());
         // usuarioEditado.setRolID(usuarioEditado.getRolID());
         usuarioEditado.setRolesEntidad(usuarioEditado.getRolesEntidad());
+        usuarioEditado.setEstado(usuarioEditado.getEstado());
         usuariosRepositorio.save(usuarioEditado);
     }
 
@@ -157,7 +159,9 @@ public class UsuariosServicio {
 
     public UsuariosEntidad authenticateUser(String correo, String contrasenia) {
         UsuariosEntidad usuario = usuariosRepositorio.findByCorreo(correo);
-        if (usuario != null && usuario.getContrasenia().equals(contrasenia)) {
+        //usuario.getEstado();
+        // EstadoTipo estado = usuario.getEstado();
+        if (usuario != null && usuario.getEstado() != null && usuario.getContrasenia().equals(contrasenia) && usuario.getEstado().equals(EstadoTipo.ACTIVO)) {
             return usuario;
         }
         return null;
@@ -187,5 +191,17 @@ public class UsuariosServicio {
             return usuariosRepositorio.findById(UsuarioID);
         }
         return null;
+    }
+
+    public void editarEstadoUsuario(Long usuarioID) {
+        Optional<UsuariosEntidad> usuario = usuariosRepositorio.findById(usuarioID);
+        if (usuario.isPresent()) {
+            if (usuario.get().getEstado() == null || usuario.get().getEstado().equals(EstadoTipo.ACTIVO)) {
+                usuario.get().setEstado(EstadoTipo.INACTIVO);
+            } else {
+                usuario.get().setEstado(EstadoTipo.ACTIVO);
+            }
+            usuariosRepositorio.save(usuario.get());
+        }
     }
 }

@@ -70,7 +70,7 @@
                     <!-- Lista de usuarios -->
 
                     <div class="table-responsive">
-                        <table class="table table-striped">
+                        <table class="table table-hover">
                             <thead class="thead-dark">
                                 <tr>
                                     <th>Identificación</th>
@@ -78,6 +78,7 @@
                                     <th>Correo</th>
                                     <th>Contraseña</th>
                                     <th>Rol</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -88,10 +89,14 @@
                                     <td th:text="${usuario.correo}"></td>
                                     <td th:text="${usuario.contrasenia}"></td>
                                     <td th:text="${usuario.rolesEntidad.nombreRol}"></td>
+                                    <td th:text="${usuario.estado}"></td>
                                     <td>
                                         <div class="btn-toolbar" role="toolbar">
                                             <div class="btn-group mr-2" role="group">
                                                 <a  th:href="@{/usuarios/editar/{usuarioID}(usuarioID=*{usuario.usuarioID})}" class="btn btn-primary">Editar</a>
+                                            </div>
+                                            <div class="btn-group mr-2" role="group">
+                                                <a  th:href="@{/usuarios/editar/estado/{usuarioID}(usuarioID=*{usuario.usuarioID})}" class="btn btn-success">Estado</a>
                                             </div>
                                             <div class="btn-group mr-2" role="group">
                                                 <a th:href="@{/usuarios/eliminar/{usuarioID}(usuarioID=*{usuario.usuarioID})}" class="btn btn-danger" 

@@ -10,6 +10,8 @@ import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -37,6 +39,18 @@ public class UsuariosEntidad {
     
     @Column(name = "contrasenia")
     private String contrasenia;
+
+    @Column(name = "estado")
+    @Enumerated(value = EnumType.STRING)
+    private EstadoTipo estado;
+
+    public EstadoTipo getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoTipo estado) {
+        this.estado = estado;
+    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rol_ID")

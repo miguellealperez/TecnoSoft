@@ -110,6 +110,13 @@
                                     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required th:field="*{productoDescripcion}"></textarea>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="productoEstado">Estado:</label>
+                                    <select id="productoEstado" name="productoEstado" th:field="*{productoEstado}" class="form-control" required> 
+                                        <option th:each="estado : ${estados}" th:value="${estado}" th:text="${estado}"></option>
+                                    </select>
+                                </div>
+
 
                                 <!-- Mostrar el mensaje de error si existe en el modelo-->
                                 <div th:if="${error}" class="alert alert-danger alert-dismissible fade show" role="alert">

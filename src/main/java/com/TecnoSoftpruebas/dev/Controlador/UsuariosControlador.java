@@ -101,6 +101,7 @@ public class UsuariosControlador {
     @PostMapping("/usuarios/crear")
     public String guardarUsuario(@ModelAttribute("usuario") UsuariosEntidad usuario, Model model) {
         try {
+            model.addAttribute("roles", rolesRepositorio.findAll());
             RolesEntidad roles = rolesServicios.buscarPorId(usuario.getRolesEntidad().getRolID());
             usuario.setRolesEntidad(roles);
             usuariosServicio.crearUsuario(usuario);
@@ -136,6 +137,12 @@ public class UsuariosControlador {
     @GetMapping("/usuarios/eliminar/{usuarioID}")
     public String eliminarUsuario(@PathVariable("usuarioID") Long usuarioID) {
         usuariosServicio.eliminarUsuarioPorId(usuarioID);
+        return "redirect:/usuarios";
+    }
+
+    @GetMapping("/usuarios/editar/estado/{usuarioID}")
+    public String editarEstadoUsuario(@PathVariable("usuarioID") Long usuarioID) {
+        usuariosServicio.editarEstadoUsuario(usuarioID);
         return "redirect:/usuarios";
     }
 

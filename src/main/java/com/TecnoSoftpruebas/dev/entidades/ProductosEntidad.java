@@ -38,6 +38,17 @@ public class ProductosEntidad {
     @Column(name = "producto_descripcion")
     private String productoDescripcion;
 
+    @Column(name = "producto_estado")
+    private EstadoTipo productoEstado;
+
+    public EstadoTipo getProductoEstado() {
+        return productoEstado;
+    }
+
+    public void setProductoEstado(EstadoTipo productoEstado) {
+        this.productoEstado = productoEstado;
+    }
+
     public Long getProductoID() {
         return productoID;
     }
