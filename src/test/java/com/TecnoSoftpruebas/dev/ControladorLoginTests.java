@@ -4,13 +4,13 @@
 // */
 package com.TecnoSoftpruebas.dev;
 
-import com.TecnoSoftpruebas.dev.Controlador.LoginControlador;
+// import com.TecnoSoftpruebas.dev.Controlador.LoginControlador;
 import com.TecnoSoftpruebas.dev.Servicios.RolesServicios;
 import com.TecnoSoftpruebas.dev.Servicios.UsuariosServicio;
 import com.TecnoSoftpruebas.dev.entidades.RolesEntidad;
 import com.TecnoSoftpruebas.dev.entidades.UsuariosEntidad;
 import com.TecnoSoftpruebas.dev.repositorios.RolesRepositorio;
-import com.TecnoSoftpruebas.dev.repositorios.UsuariosRepositorio;
+// import com.TecnoSoftpruebas.dev.repositorios.UsuariosRepositorio;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,8 +23,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class ControladorLoginTests {
 
-    @Autowired
-    private LoginControlador controladorLogin;
+    // @Autowired
+    // private LoginControlador controladorLogin;
 
     @Autowired
     private UsuariosServicio usuariosServicio;
@@ -65,7 +65,7 @@ class ControladorLoginTests {
     @Test
     void consultarUsuario(){
         
-        assert usuariosServicio.buscarPorid(123L) != null;
+        assert usuariosServicio.buscarPorid(1337L) != null;
     }
 
 

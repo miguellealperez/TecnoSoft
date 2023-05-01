@@ -51,6 +51,9 @@ public class ProductosServicio {
         productoEditado.setProductoCosto(productoEditado.getProductoCosto());
         productoEditado.setProductoValor(productoEditado.getProductoValor());
         productoEditado.setProductoEstado(productoEditado.getProductoEstado());
+        productoEditado.setProductoIva(productoEditado.getProductoIva());
+        productoEditado.setProductoIvaValor(productoEditado.getProductoIvaValor());
+        productoEditado.setPorcentajeUtilidad(productoEditado.getPorcentajeUtilidad());
         productosrepositorio.save(productoEditado);
     }   
     
