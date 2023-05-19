@@ -67,7 +67,48 @@
                             <a th:href="@{/productos/nuevo}" class="btn btn-success">Crear nuevo producto</a>
                         </div>
                     </div>
-                    <!-- Lista de usuarios -->
+
+                    <!-- Tabla responsiva -->
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Producto ID</th>
+                                    <th>Nombre</th>
+                                    <th>Costo</th>
+                                    <th>Valor venta</th>
+                                    <th>Tipo</th>
+                                    <th>Descripción</th>
+                                    <th>Estado del producto</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Lista de usuarios -->
+                                <tr th:each="producto : ${productos}" th:object="${producto}">
+                                    <td th:text="*{productoID}"></td>
+                                    <td th:text="*{productoNombre}"></td>
+                                    <td th:text="*{productoCosto}"></td>
+                                    <td th:text="*{productoValor}"></td>
+                                    <td th:text="*{productoTipo}"></td>
+                                    <td th:text="*{productoDescripcion}"></td>
+                                    <td th:text="*{productoEstado}"></td>
+                                    <td>
+                                        <div class="btn-toolbar" role="toolbar">
+                                            <div class="btn-group mr-2" role="group">
+                                                <a  th:href="@{/productos/editar/{productoID}(productoID=*{productoID})}" class="btn btn-primary">Editar</a>
+                                            </div>
+                                            <div class="btn-group mr-2" role="group">
+                                                <a th:href="@{/productos/eliminar/{productoID}(productoID=*{productoID})}" class="btn btn-danger" 
+                                                   onclick="return confirm('¿Está seguro de que desea eliminar el producto?');">Eliminar</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    <!-- Lista de usuarios 
                     <div class="row">
                         <div th:each="producto : ${productos}" th:object="${producto}" class="col-md-4">
                             <div class="card mb-3">
@@ -93,7 +134,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
