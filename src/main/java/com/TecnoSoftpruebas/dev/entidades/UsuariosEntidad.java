@@ -4,9 +4,19 @@
  */
 package com.TecnoSoftpruebas.dev.entidades;
 
+
+
+import java.util.Set;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -29,9 +39,34 @@ public class UsuariosEntidad {
     
     @Column(name = "contrasenia")
     private String contrasenia;
-    
-    @Column(name = "rol_ID")
-    private String rolID;
+
+    @Column(name = "estado")
+    @Enumerated(value = EnumType.STRING)
+    private EstadoTipo estado;
+
+    public EstadoTipo getEstado() {
+        return estado;
+    }
+
+    public void setEstado(EstadoTipo estado) {
+        this.estado = estado;
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "rol_ID")
+    private RolesEntidad rolesEntidad;
+
+    public RolesEntidad getRolesEntidad() {
+        return rolesEntidad;
+    }
+
+    public void setRolesEntidad(RolesEntidad rolesEntidad) {
+        this.rolesEntidad = rolesEntidad;
+    }
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_ID")
+    private Set<GastosEntidad> GastosEntidad;
     
     public UsuariosEntidad(){}
 
@@ -59,14 +94,6 @@ public class UsuariosEntidad {
         this.correo = correo;
     }
 
-    public String getRolID() {
-        return rolID;
-    }
-
-    public void setRolID(String rolID) {
-        this.rolID = rolID;
-    }
-
     public String getContrasenia() {
         return contrasenia;
     }
@@ -78,4 +105,13 @@ public class UsuariosEntidad {
     public boolean isPresente() {
         return getCorreo() != null;
     }
+
+    public Set<GastosEntidad> getGastosEntidad() {
+        return GastosEntidad;
+    }
+
+    public void setGastosEntidad(Set<GastosEntidad> gastosEntidad) {
+        GastosEntidad = gastosEntidad;
+    }
+
 }

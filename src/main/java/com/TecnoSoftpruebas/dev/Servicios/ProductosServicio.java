@@ -4,6 +4,7 @@
  */
 package com.TecnoSoftpruebas.dev.Servicios;
 
+import com.TecnoSoftpruebas.dev.entidades.EstadoTipo;
 import com.TecnoSoftpruebas.dev.entidades.ProductosEntidad;
 import com.TecnoSoftpruebas.dev.repositorios.ProductosRepositorio;
 import java.util.List;
@@ -31,6 +32,7 @@ public class ProductosServicio {
         if (productosrepositorio.findByproductoNombre(producto.getProductoNombre().trim()) != null) {
             throw new ProductoExixstenteExcepcion("Producto existe por nombre [" + producto.getProductoNombre().trim() + "]");
         }
+        producto.setProductoEstado(EstadoTipo.ACTIVO);
         return productosrepositorio.save(producto);
     }
 
@@ -48,6 +50,10 @@ public class ProductosServicio {
         productoEditado.setProductoDescripcion(productoEditado.getProductoDescripcion());
         productoEditado.setProductoCosto(productoEditado.getProductoCosto());
         productoEditado.setProductoValor(productoEditado.getProductoValor());
+        productoEditado.setProductoEstado(productoEditado.getProductoEstado());
+        productoEditado.setProductoIva(productoEditado.getProductoIva());
+        productoEditado.setProductoIvaValor(productoEditado.getProductoIvaValor());
+        productoEditado.setPorcentajeUtilidad(productoEditado.getPorcentajeUtilidad());
         productosrepositorio.save(productoEditado);
     }   
     

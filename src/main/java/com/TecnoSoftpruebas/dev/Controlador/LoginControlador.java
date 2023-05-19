@@ -27,7 +27,6 @@ public class LoginControlador {
     @Autowired
     private final UsuariosServicio usuariosServicio;
 
-    @Autowired
     public LoginControlador(UsuariosServicio usuariosServicio) {
         this.usuariosServicio = usuariosServicio;
     }
@@ -50,7 +49,7 @@ public class LoginControlador {
         UsuariosEntidad authenticatedUser = usuariosServicio.authenticateUser(usuario.getCorreo(), usuario.getContrasenia());
         if (authenticatedUser != null) {
             // Obtener el rol del usuario autenticado
-            String rol = authenticatedUser.getRolID();
+            String rol = authenticatedUser.getRolesEntidad().getNombreRol();
 
             // Redirigir al usuario a la vista correspondiente según su rol
             switch (rol) {
@@ -67,7 +66,7 @@ public class LoginControlador {
             }
         } else {
             bindingResult.rejectValue("contrasenia", "error.user", "Contraseña incorrecta");
-            model.addAttribute("loginError", "Contraseña incorrecta. Por favor, inténtalo de nuevo.");
+            model.addAttribute("loginError", "Contraseña incorrecta o Cuenta inactiva. Por favor, inténtelo de nuevo o Comuniquese con un administrador.");
             return "login";
         }
     }

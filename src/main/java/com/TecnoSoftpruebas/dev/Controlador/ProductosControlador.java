@@ -5,6 +5,7 @@
 package com.TecnoSoftpruebas.dev.Controlador;
 
 import com.TecnoSoftpruebas.dev.Servicios.ProductosServicio;
+import com.TecnoSoftpruebas.dev.entidades.EstadoTipo;
 import com.TecnoSoftpruebas.dev.entidades.ProductosEntidad;
 import java.util.List;
 import java.util.Optional;
@@ -28,8 +29,6 @@ public class ProductosControlador {
     @Autowired
     private ProductosServicio productosServicio;
     
-    @Autowired
-
     public ProductosControlador(ProductosServicio productosServicio) {
         this.productosServicio = productosServicio;
     }
@@ -38,6 +37,7 @@ public class ProductosControlador {
     public String ListarProductos(Model model){
         List<ProductosEntidad> productos = productosServicio.ListarProductos();
         model.addAttribute("productos", productos);
+        model.addAttribute("totalProductos", productos.size());
         return "productos";
     }
     
@@ -70,6 +70,7 @@ public class ProductosControlador {
         Optional<ProductosEntidad> producto = productosServicio.buscarProductoporID(ProductoID);
         if(producto.isPresent()){
             model.addAttribute("producto", producto);
+            model.addAttribute("estados", EstadoTipo.values());
             return "productoeditar";
         }else {
             return "redirect:/productos";
@@ -90,7 +91,7 @@ public class ProductosControlador {
                     //System.out.println("uedi2: " + usuarioEditado.getUsuarioID());
                     return "productoeditar";
                 }
-
+                
                 productosServicio.GuardarProducto(productoEditado);
                 return "redirect:/productos"; 
             }

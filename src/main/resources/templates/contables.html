@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es" encoding="UTF-8" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Lista de Gastos - TecnoSoft</title>
+        <!-- Incluir los recursos de Bootstrap -->
+        <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
+        <script src="/webjars/jquery/jquery.min.js"></script>
+        <script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+        <style>
+            /* Agregar estilo personalizado */
+            body {
+                padding-top: 70px;
+            }
+            .card-footer {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
+            .btn-toolbar .btn {
+                margin-right: 10px;
+            }
+            .btn-toolbar .btn:last-child {
+                margin-right: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Barra de navegación -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">Tecno Soft</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" th:href="@{/usuarios}">Usuarios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/ventas}">Ventas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/compras}">Compras</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/productos}">productos</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/logout}">Cerrar sesión</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container mt-4">
+            <div class="card">
+                <h5 class="card-header">Lista de Gastos</h5>
+                <div class="card-body">
+                    <!-- Botones -->
+                    <div class="btn-toolbar mb-3" role="toolbar">
+                        <div class="btn-group mr-2" role="group">
+                            <a th:href="@{/contable/__${usuarioID}__/nuevo}" class="btn btn-success">Crear nuevo Gasto</a>
+                        </div>
+                    </div>
+                    <!-- Lista de usuarios -->
+                    <div class="row">
+                        <div th:each="gasto : ${gastos}" th:object="${gasto}" class="col-md-4">
+                            <div class="card mb-3">
+                                <h5 class="card-header" th:text="*{nombreGasto}"></h5>
+                                <div class="card-body">
+                                    <p class="card-text"><strong>Gasto ID:</strong> <span th:text="*{numeroGasto}"></span></p>
+                                    <p class="card-text"><strong>Valor:</strong> <span th:text="*{valorGasto}"></span></p>
+                                    <p class="card-text"><strong>Fecha:</strong> <span th:text="*{fechaGasto}"></span></p>
+                                    <p class="card-text"><strong>Tipo:</strong> <span th:text="*{tipoGasto}"></span></p>
+                                    <p class="card-text"><strong>Descripción:</strong> <span th:text="*{descripcionGasto}"></span></p>
+                                    <p class="card-text"><strong>Responsable:</strong> <span <td th:text="${gasto.usuariosEntidad != null} ? ${gasto.usuariosEntidad.nombre} : 'Usuario Eliminado.'"></td>></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

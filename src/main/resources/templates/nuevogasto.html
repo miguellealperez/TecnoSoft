@@ -2,7 +2,7 @@
 <html lang="es" encoding="UTF-8" xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8">
-        <title>Editar usuario - TecnoSoft</title>
+        <title>Nuevo Gasto - TecnoSoft</title>
         <!-- Incluir los recursos de Bootstrap -->
         <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
         <script src="/webjars/jquery/jquery.min.js"></script>
@@ -44,6 +44,9 @@
                         <li class="nav-item">
                             <a class="nav-link" th:href="@{/compras}">Compras</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" th:href="@{/productos}">productos</a>
+                        </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
@@ -53,55 +56,56 @@
                 </div>
             </div>
         </nav>
-
+        <!-- Contenido -->
         <div class="container my-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Actualizar usuario</h3>
+                            <h3 class="card-title">Crear Gasto</h3>
                         </div>
                         <div class="card-body">
                             <!-- Añadir un formulario con clase form -->
-                            <form th:action="@{/usuarios/editar}" th:object="${usuario}" method="post" class="form">
-                                <!-- Añadir un campo oculto para el id del usuario -->
-                                <input type="hidden" th:field="*{usuarioID}" />
+                            <form th:action="@{/contable/__${usuarioID}__/crear}" th:object="${gasto}" method="post" class="form">
                                 <!-- Añadir un grupo de entrada con clase form-group para cada campo -->
                                 <div class="form-group">
-                                    <label for="nombre">Nombre:</label>
-                                    <input type="text" id="nombre" name="nombre" th:field="*{nombre}" class="form-control" required minlength="3" maxlength="50" placeholder="Ingrese el nombre" />
+                                    <label for="productoNombre">Nombre del gasto:</label>
+                                    <input type="text" id="nombre" name="nombre" th:field="*{nombreGasto}" class="form-control" required minlength="3" maxlength="50" placeholder="Digite el nombre del gasto" />
                                 </div>
                                 <div class="form-group">
-                                    <label for="correo">Correo electrónico:</label>
-                                    <input type="email" id="correo" name="correo" th:field="*{correo}" class="form-control" required maxlength="50" placeholder="Ingrese el correo electrónico" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="usuarioID">Número de documento de identidad:</label>
-                                    <input type="number" id="usuarioID" name="usuarioID" th:field="*{usuarioID}" class="form-control" required minlength="5" maxlength="20" placeholder="Ingrese el id" readonly />
-                                </div>
-                                <div class="form-group">
-                                    <label for="contrasenia">Contraseña:</label>
-                                    <input type="password" id="contrasenia" name="contrasenia" th:field="*{contrasenia}" class="form-control" required minlength="8" placeholder="Ingrese nuevamente la contraseña" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="rolID">Rol:</label>
-                                    <!-- Añadir un selector con clase form-control para elegir el rol -->
-                                    <!-- Añadir un selector con clase form-control para elegir el rol -->
-                                    <select id="rolID" name="rolID" th:field="*{rolesEntidad}" class="form-control" required>
-                                        <!-- Añadir una opción para cada rol disponible -->
-                                        <option value="">Seleccione el rol</option>
-                                        <option th:each="rol : ${roles}" th:value="${rol.rolID}" th:text="${rol.nombreRol}"></option>
+                                    <label for="tipoGasto">Tipo de Gasto:</label>
+                                    <select id="tipoGasto" name="tipoGasto" th:field="*{tipoGasto}" class="form-control" required> 
+                                        <option value="">Seleccione el tipo</option>
+                                        <option th:value="Uno">Uno</option>
+                                        <option th:value="Dos">Dos</option>
+                                        <option th:value="Tres">Tres</option>
                                     </select>
-                                    <div th:if="${#fields.hasErrors('rolesEntidad')}" th:errors="*{rolesEntidad}" class="text-danger"></div>
+                                    <div th:if="${#fields.hasErrors('tipoGasto')}" th:errors="*{tipoGasto}" class="text-danger"></div>
                                 </div>
-                                <!-- Mostrar el mensaje de error si existe en el modelo-->
-                                <div th:if="${error}" class="alert alert-danger">
-                                    <p th:text="${error}"></p>
-                                </div> 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                                    <a th:href="@{/usuarios}" class="btn btn-link">Cancelar</a>
+                                    <label for="valorGasto" class="col-form-label">Valor:</label>
+                                    <div class="col-sm-10">
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text">$</span>
+                                            <input type="number" class="form-control" aria-label="Amount (to the nearest dollar)" required th:field="*{valorGasto}">
+                                            <span class="input-group-text">.00</span>
+                                        </div>
+                                    </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="fechaGasto">Fecha del Gasto:</label>
+                                    <input type="date" id="nombre" name="nombre" th:field="*{fechaGasto}" class="form-control" required placeholder="Seleccione la Fecha" />
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Descripción:</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required th:field="*{descripcionGasto}"></textarea>
+                                </div>
+
+                                <input type="hidden" name="usuario_ID" th:value="${usuarioID}" />
+
+                                <!-- Añadir un botón de tipo submit con clase btn y btn-primary para enviar el formulario -->
+                                <button type="submit" class="btn btn-primary">Crear</button>
                             </form>
                         </div>
                     </div>
@@ -110,3 +114,4 @@
         </div>
     </body>
 </html>
+

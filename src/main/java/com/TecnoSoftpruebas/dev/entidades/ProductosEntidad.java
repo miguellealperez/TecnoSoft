@@ -38,6 +38,50 @@ public class ProductosEntidad {
     @Column(name = "producto_descripcion")
     private String productoDescripcion;
 
+    @Column(name = "producto_estado")
+    private EstadoTipo productoEstado;
+
+    @Column(name = "producto_iva")
+    private String productoIva;
+
+    @Column(name = "producto_iva_valor")
+    private float productoIvaValor;
+
+    @Column(name = "producto_procentaje_utilidad")
+    private float porcentajeUtilidad;
+
+    public float getPorcentajeUtilidad() {
+        return porcentajeUtilidad;
+    }
+
+    public void setPorcentajeUtilidad(float porcentajeUtilidad) {
+        this.porcentajeUtilidad = porcentajeUtilidad;
+    }
+
+    public String getProductoIva() {
+        return productoIva;
+    }
+
+    public void setProductoIva(String productoIva) {
+        this.productoIva = productoIva;
+    }
+
+    public float getProductoIvaValor() {
+        return productoIvaValor;
+    }
+
+    public void setProductoIvaValor(float productoIvaValor) {
+        this.productoIvaValor = productoIvaValor;
+    }
+
+    public EstadoTipo getProductoEstado() {
+        return productoEstado;
+    }
+
+    public void setProductoEstado(EstadoTipo productoEstado) {
+        this.productoEstado = productoEstado;
+    }
+
     public Long getProductoID() {
         return productoID;
     }
